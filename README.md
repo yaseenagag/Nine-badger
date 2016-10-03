@@ -1,45 +1,24 @@
-## Description
 
-As a business owner, I want a system that allows me to add all of my employees and set their availability and available blocks of time. 
-
-As a business customer, I want a system that allows me to book an appointment for a specific block of time with a specific employee.
-
-## Context
-
-This is important because it will provide opportunity to explore some key web development skills:
-* Working with a backend (code running on a server)
-* Working with a sql database
-* Rendering a complex HTML view (the calendar)
-* Incorporating interactive elements around a calendar view
+![Wireframe Schema SQL](Wireframe.jpg)
 
 
-## Example Application
-https://www.agendize.com/
+#### HTTP API
 
-## Specifications
+| action                             | CRUD   | verb | path                         |
+| ----------------------------       | ------ | ---- | ---------------------------- |
+| findUserByEmailOrcreateUser(userId)| create | post | /api/users/                  |
+| getUserById(userId)                | show   | get  | /api/users/:userId           |
+| updateUser(userId, attrs)          | update | post | /api/users/:userId           |
+| getAllServices()                   | Show   | get  | /api/services                |
+| setAppointment(attrs)              | create | post | /api/appointments            |
+| deleteAppointment(apptId)          | delete | post | /api/appointments            |
+| updateAppointment(apptId)          | update | post | /api/appointments            |
+| getAllAppointments(userId)         | show   | get  | /api/appointments            |
 
-- [ ] Customers and employees are able to sign in and sign up.
-- [ ] Employees are able to set their availability.
-- [ ] Customer is able to make an appointment for a specific service.
-- [ ] Customer/employee/appointment data is stored in database.
-- [ ] Customer should be able to see available time slots on their calendar.
-- [ ] Users can cancel and update appointments.
 
-### Optional Stretch Goals:
 
-- [ ] Users receive push notifications as Calendar gets updated in real time
-- [ ] Database is secure
-- [ ] Mobile friendly (responsive)
-- [ ] Users can check the availability of specific employees and choose those times 
-- [ ] Employs an algorithm to choose the available employees for the appointment, so that the work load is evenly distributed
 
-### Required
 
-_Do not remove these specs - they are required for all goals_.
-
-- [ ] The artifact produced is properly licensed, preferably with the [MIT license][mit-license].
-
----
 
 <!-- LICENSE -->
 
