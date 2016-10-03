@@ -1,5 +1,5 @@
 
-![Wireframe Schema SQL](Wireframe.jpg)
+![Wireframe Schema SQL](Wireframe.png)
 
 
 #### HTTP API
