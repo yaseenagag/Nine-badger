@@ -34,6 +34,7 @@ exports.up = (knex, Promise) => {
       table.string('password')
     }),
 
+
     knex.schema.createTable('agent_services', (table) => {
       table.increments('id').primary()
       table.integer('agent_id') 
@@ -55,9 +56,10 @@ exports.down = (knex, Promise) => {
 
   return Promise.all([
     knex.schema.dropTable('users'),
-    knex.schema.dropTable('user_boards'),
-    knex.schema.dropTable('boards'),
-    knex.schema.dropTable('lists'),
-    knex.schema.dropTable('cards'),
+    knex.schema.dropTable('services'),
+    knex.schema.dropTable('agents'),
+    knex.schema.dropTable('agent_services'),
+    knex.schema.dropTable('appointments'),
   ])
 }
+
