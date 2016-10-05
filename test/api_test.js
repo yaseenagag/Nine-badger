@@ -2,7 +2,7 @@ const { chai, expect, request, server, commands } = require('./setup')
 
 
 describe('API', () => {
-  
+
   describe('/api/users', () => {
 
     describe('POST /user', () => {
@@ -16,7 +16,7 @@ describe('API', () => {
           password: '123'
         }
         return request('post', '/user', userAttributes).then(response => {
-          const user = response.body 
+          const user = response.body
           expect(response).to.have.status(200);
           expect(response).to.be.json; // jshint ignore:line
           expect(user).to.be.a('object')
@@ -50,10 +50,11 @@ describe('API', () => {
             email: 'larry@harvey.to',
             phoneNumber: '8151231234',
             address: '9th Street, Oakland, CA',
-            password: '456' 
+            password: '456'
           })
         ])
       })
+    })
 
       describe('GET /api/users', () => {
 
@@ -122,7 +123,7 @@ describe('API', () => {
       })
 
     }) // dummy data users
-  
+
   })
 
 })
