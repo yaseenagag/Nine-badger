@@ -1,9 +1,40 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express'
+import {queries, commands} from '../database'
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const router = new express.Router()
 
-module.exports = router;
+router.get('/', (request, response, next) => {
+  response.send("home Page")
+})
+
+router.get('/user', (request, response, next) => {
+  queries.getUsers()
+    .then(user => {
+      response.json(user)
+    })
+})
+
+router.post('/user', (request, response, next) => {
+  const att = request.body
+  commands.createUser(att)
+    .then(user => {
+      response.json(user)
+    })
+})
+
+router.get('/user/:id', (request, response, next) => {
+  const userId = request.params.id
+  queries.getUserById(userId)
+    .then(user => {
+      if (user){
+        response.json(user)
+      }else{
+        response.status(404).json(null)
+      }
+    })
+})
+
+
+export default router
+
+
