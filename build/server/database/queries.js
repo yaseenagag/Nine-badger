@@ -11,6 +11,9 @@ exports.default = function (knex) {
     },
     getUserById: function getUserById(userId) {
       return knex.table('users').where('id', userId).first('*');
+    },
+    getAllServices: function getAllServices() {
+      return knex.table('services').select('*');
     }
   };
 };

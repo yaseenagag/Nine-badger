@@ -13,5 +13,11 @@ export default (knex) => ({
       .first('*')
   },
 
+  getAllServices() {
+    return knex
+      .table('services')
+      .select('*')
+  }
+
 
 })

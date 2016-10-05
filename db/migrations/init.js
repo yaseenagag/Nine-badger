@@ -37,14 +37,14 @@ exports.up = (knex, Promise) => {
 
     knex.schema.createTable('agent_services', (table) => {
       table.increments('id').primary()
-      table.integer('agent_id') 
-      table.integer('service_id') 
+      table.integer('agent_id')
+      table.integer('service_id')
     }),
 
     knex.schema.createTable('appointments', (table) => {
       table.increments('id').primary()
-      table.integer('board_id') //.references('id').inTable('boards')
-      table.integer('list_id') //.references('id').inTable('lists')
+      table.integer('agent_id') //.references('id').inTable('boards')
+      table.integer('service_id') //.references('id').inTable('lists')
       table.string('content')
     }),
 
@@ -62,4 +62,3 @@ exports.down = (knex, Promise) => {
     knex.schema.dropTable('appointments'),
   ])
 }
-

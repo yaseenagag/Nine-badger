@@ -16,8 +16,15 @@ export default (knex, queries) => ({
       .returning('*')
       .then(firstRecord)
 
-  }
+  },
 
+  createService(attributes) {
+    return knex
+      .table('services')
+      .insert(attributes)
+      .returning('*')
+      .then(firstRecord)
+  }
 });
 
 const firstRecord = records => records[0];

@@ -11,6 +11,9 @@ exports.default = function (knex, queries) {
     },
     updateUser: function updateUser(userId, attributes) {
       return knex.table('users').where('id', userId).update(attributes).returning('*').then(firstRecord);
+    },
+    createService: function createService(attributes) {
+      return knex.table('services').insert(attributes).returning('*').then(firstRecord);
     }
   };
 };
