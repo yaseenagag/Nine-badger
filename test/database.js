@@ -204,7 +204,7 @@ describe('database', () => {
                "day": "tuesday",
                "hours": [{
                   "end": "11:00",
-                  "start": "4:00"
+                  "start": "04:00"
                }]
             },
             {
@@ -273,6 +273,31 @@ describe('database', () => {
               throw new Error('unexpected user record')
             }
           })
+        })
+      })
+    })
+
+    describe('get all agent_services table', () => {
+      it('should return an array of all associates ids', () => {
+        return queries.getAgentServices().then( ids => {
+          expect(ids).to.be.a('array')
+          expect(ids.length).to.eql(4)
+          ids.forEach(agent => {
+            if (agent.service_id === 1){
+              expect(agent.agent_id).to.eql(16)
+            }else if (agent.service_id === 3){
+              expect(agent.agent_id).to.eql(15)
+            }
+          })
+        })
+      })
+    })
+
+    describe('get all free-slots agents', () => {
+      it('should return an array of all free-slots', () => {
+        return queries.getFreeSlotsByServiceId(2).then( slots => {
+          expect(slots).to.be.a('object')
+          expect(slots.monday).to.be.a('array')
         })
       })
     })

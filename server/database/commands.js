@@ -26,20 +26,31 @@ export default (knex, queries) => ({
       .then(firstRecord)
   },
 
+
   createAgent(attributes, availability, services) {
+    attributes.availability = JSON.stringify(availability)
     return Promise.all([
       knex.table('agents')
-          .insert(attributes)
+          .insert( attributes )
           .returning('id')
       ])
-      .then(agentId => {
-        agentId = agentId[0][0]
-        return knex.table('agents')
-        .where({id : agentId})
-        .update({availability: JSON.stringify(availability)})
-        .returning('*')
+    .then( agentId => {
+      const agent_id = agentId[0][0]
+
+      const inserts = services.map( service_id => {
+        return knex.table('agent_services')
+          .insert({agent_id, service_id })
       })
-      .then(firstRecord)
+
+      return Promise.all( inserts )
+    })
+  },
+
+  createAgentService(agentId, serviceId) {
+    return knex
+      .table('agent_services')
+      .insert({agent_id: agentId, service_id: serviceId})
+      .returning('*')
   }
 
 

@@ -144,8 +144,7 @@ describe('API', () => {
         ])
       })
 
-            describe('GET /services', () => {
-
+      describe('GET /services', () => {
         it('should render a json array of all services', () => {
           return request('get', '/services').then(response => {
             const services = response.body
@@ -172,6 +171,80 @@ describe('API', () => {
 
       })
 
+    context('when there are agents in the database', () => {
+    beforeEach( () => {
+      return Promise.all([
+        commands.createAgent({
+          id: 16,
+          firstName: 'Mike',
+          lastName: 'Abelson',
+          phoneNumber: '4157077256',
+          email: 'mikeadelson@yahoo.com',
+          imageUrl: 'http://vignette2.wikia.nocookie.net/spongebob/images/3/33/Patrick_Star.svg/revision/latest?cb=20100724183918',
+          password: '777'
+        },
+          [
+            {
+               "day": "tuesday",
+               "hours": [{
+                  "end": "11:00",
+                  "start": "04:00"
+               }]
+            },
+            {
+               "day": "thursday",
+               "hours": [{
+                  "end": "18:00",
+                  "start": "06:00"
+               }]
+            }
+          ],
+          [1 ,2]
+        ),
+        commands.createAgent({
+          id: 15,
+          firstName: 'Majid',
+          lastName: 'Rahimi',
+          phoneNumber: '4152655659',
+          email: 'majid88rahimi@gmail.com',
+          imageUrl: 'https://avatars0.githubusercontent.com/u/7544733?v=3&s=466',
+          password: '333'
+          },
+          [
+            {
+               "day": "monday",
+               "hours": [{
+                  "end": "17:00",
+                  "start": "11:00"
+               }]
+            },
+            {
+               "day": "friday",
+               "hours": [{
+                  "end": "20:00",
+                  "start": "08:00"
+               }]
+            }
+          ],
+          [366, 15]
+        )
+      ])
+    })
+  
+      describe('GET /freeSlots/:serviceId', () => {
+        it('should render a json array of all freeSlots', () => {
+          return request('get', '/freeSlots/366').then(response => {
+            const freeSlots = response.body
+            expect(freeSlots).to.be.a('object')
+            expect(freeSlots.monday).to.be.a('array')
+            console.log("freeSlots+++++ ", freeSlots )
+
+          })
+        })
+
+      })
+
+    }) // dummy data agents
     }) // dummy data services
 
   })
