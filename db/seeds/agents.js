@@ -27,7 +27,8 @@ exports.seed = (knex, Promise) => {
                }]
             }
           ],
-          password: '123'
+        password: '123',
+        services: ['1', '2']
         }),
 
         knex('agents').insert({
@@ -52,7 +53,8 @@ exports.seed = (knex, Promise) => {
                }]
             }
           ],
-          password: '333'
+          password: '333',
+          services: ['2', '3']
         }),
 
         knex('agents').insert({
@@ -77,7 +79,8 @@ exports.seed = (knex, Promise) => {
                }]
             }
           ],
-          password: '777'
+          password: '777',
+          services: ['3', '4']
         })
 
       ])

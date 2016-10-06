@@ -27,7 +27,7 @@ exports.up = (knex, Promise) => {
       table.string('lastName')
       table.string('phoneNumber')
       table.string('imageUrl')
-      table.string('availability')
+      table.json('availability')
       table.string('address')
       table.string('email')
       table.string('role')

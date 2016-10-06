@@ -14,6 +14,12 @@ exports.default = function (knex) {
     },
     getAllServices: function getAllServices() {
       return knex.table('services').select('*');
+    },
+    getFreeSlotsByServiceId: function getFreeSlotsByServiceId(serviceId) {
+      return knex.table('agents');
+    },
+    getAgents: function getAgents() {
+      return knex.table('agents').select('*');
     }
   };
 };

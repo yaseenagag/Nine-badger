@@ -54,7 +54,6 @@ describe('API', () => {
           })
         ])
       })
-    })
 
       describe('GET /api/users', () => {
 
@@ -123,6 +122,57 @@ describe('API', () => {
       })
 
     }) // dummy data users
+  })
+
+  describe('/services', () => {
+
+    context('when there are services in the database', () => {
+      beforeEach( () => {
+        return Promise.all([
+          commands.createService({
+            id: 15,
+            title: 'Android Screens',
+            logoUrl: 'https://avatars0.githubusercontent.com/u/7544733?v=3&s=466',
+            description: 'fix androids'
+          }),
+          commands.createService({
+            id: 366,
+            title: 'Mac Screens',
+            logoUrl: 'https://avatars0.githubusercontent.com/u/7544733?v=3&s=466',
+            description: 'fix apples'
+          })
+        ])
+      })
+
+            describe('GET /services', () => {
+
+        it('should render a json array of all services', () => {
+          return request('get', '/services').then(response => {
+            const services = response.body
+            expect(services).to.be.an('array')
+            expect(services.length).to.eql(2)
+            services.forEach(service => {
+              if (service.id === 15){
+                expect(service).to.be.a('object')
+                expect(service.id).to.eql(15)
+                expect(service.title).to.eql('Android Screens')
+                expect(service.logoUrl).to.eql('https://avatars0.githubusercontent.com/u/7544733?v=3&s=466')
+                expect(service.description).to.eql('fix androids')
+              }
+              else if (service.id === 366){
+                expect(service).to.be.a('object')
+                expect(service.id).to.eql(366)
+                expect(service.title).to.eql('Mac Screens')
+                expect(service.logoUrl).to.eql('https://avatars0.githubusercontent.com/u/7544733?v=3&s=466')
+                expect(service.description).to.eql('fix apples')
+              }
+            })
+          })
+        })
+
+      })
+
+    }) // dummy data services
 
   })
 

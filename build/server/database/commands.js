@@ -14,6 +14,12 @@ exports.default = function (knex, queries) {
     },
     createService: function createService(attributes) {
       return knex.table('services').insert(attributes).returning('*').then(firstRecord);
+    },
+    createAgent: function createAgent(attributes, availability, services) {
+      return Promise.all([knex.table('agents').insert(attributes).returning('id')]).then(function (agentId) {
+        agentId = agentId[0][0];
+        return knex.table('agents').where({ id: agentId }).update({ availability: JSON.stringify(availability) }).returning('*');
+      }).then(firstRecord);
     }
   };
 };

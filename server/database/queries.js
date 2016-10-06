@@ -17,6 +17,18 @@ export default (knex) => ({
     return knex
       .table('services')
       .select('*')
+  },
+
+  getFreeSlotsByServiceId(serviceId) {
+    return knex 
+      .table('agents')
+      
+  },
+
+  getAgents() {
+    return knex
+      .table('agents')
+      .select('*')
   }
 
 

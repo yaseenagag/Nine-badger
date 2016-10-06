@@ -140,7 +140,7 @@ describe('database', () => {
 
     })
 
-  })
+  }) // dummy data users
 
   context('when there are services in the database', () => {
     beforeEach( () => {
@@ -185,6 +185,99 @@ describe('database', () => {
         })
       })
     })
-  })
+  }) // dummy data services
+
+  context('when there are agents in the database', () => {
+    beforeEach( () => {
+      return Promise.all([
+        commands.createAgent({
+          id: 16,
+          firstName: 'Mike',
+          lastName: 'Abelson',
+          phoneNumber: '4157077256',
+          email: 'mikeadelson@yahoo.com',
+          imageUrl: 'http://vignette2.wikia.nocookie.net/spongebob/images/3/33/Patrick_Star.svg/revision/latest?cb=20100724183918',
+          password: '777'
+        },
+          [
+            {
+               "day": "tuesday",
+               "hours": [{
+                  "end": "11:00",
+                  "start": "4:00"
+               }]
+            },
+            {
+               "day": "thursday",
+               "hours": [{
+                  "end": "18:00",
+                  "start": "06:00"
+               }]
+            }
+          ],
+          [1 ,2]
+        ),
+        commands.createAgent({
+          id: 15,
+          firstName: 'Majid',
+          lastName: 'Rahimi',
+          phoneNumber: '4152655659',
+          email: 'majid88rahimi@gmail.com',
+          imageUrl: 'https://avatars0.githubusercontent.com/u/7544733?v=3&s=466',
+          password: '333'
+          },
+          [
+            {
+               "day": "monday",
+               "hours": [{
+                  "end": "17:00",
+                  "start": "11:00"
+               }]
+            },
+            {
+               "day": "friday",
+               "hours": [{
+                  "end": "20:00",
+                  "start": "08:00"
+               }]
+            }
+          ],
+          [2, 3]
+        )
+      ])
+    })
+
+    describe('getAgents', () => {
+      it('should return an array of all agents', () => {
+        return queries.getAgents().then( agents => {
+          expect(agents).to.be.a('array')
+          expect(agents.length).to.eql(2)
+          agents.forEach(agent => {
+            if (agent.id === 15){
+              expect(agent).to.be.a('object')
+              expect(agent.id).to.eql(15)
+              expect(agent.firstName).to.eql('Majid')
+              expect(agent.lastName).to.eql('Rahimi')
+              expect(agent.email).to.eql('majid88rahimi@gmail.com')
+              expect(agent.phoneNumber).to.eql('4152655659')
+              expect(JSON.parse(agent.availability)).to.be.a('array')
+            }else if (agent.id === 16){
+              expect(agent).to.be.a('object')
+              expect(agent.id).to.eql(16)
+              expect(agent.firstName).to.eql('Mike')
+              expect(agent.lastName).to.eql('Abelson')
+              expect(agent.email).to.eql('mikeadelson@yahoo.com')
+              expect(agent.phoneNumber).to.eql('4157077256')
+              expect(JSON.parse(agent.availability)).to.be.a('array')
+            }else{
+              throw new Error('unexpected user record')
+            }
+          })
+        })
+      })
+    })
+
+  }) // dummy data agents
 
 })
+

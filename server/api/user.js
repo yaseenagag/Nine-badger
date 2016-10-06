@@ -7,6 +7,17 @@ router.get('/', (request, response, next) => {
   response.send("home Page")
 })
 
+router.get('/freeSlots', (request, response, next) => {
+  
+})
+
+router.get('/services', (request, response, next) => {
+  queries.getAllServices()
+    .then( services => {
+      response.json(services)
+    })
+})
+
 router.get('/user', (request, response, next) => {
   queries.getUsers()
     .then(user => {
