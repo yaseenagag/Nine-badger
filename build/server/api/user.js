@@ -18,6 +18,19 @@ router.get('/', function (request, response, next) {
   response.send("home Page");
 });
 
+router.get('/freeSlots/:serviceId', function (request, response, next) {
+  var serviceId = request.params.serviceId;
+  _database.queries.getFreeSlotsByServiceId(serviceId).then(function (freeSlots) {
+    response.json(freeSlots);
+  });
+});
+
+router.get('/services', function (request, response, next) {
+  _database.queries.getAllServices().then(function (services) {
+    response.json(services);
+  });
+});
+
 router.get('/user', function (request, response, next) {
   _database.queries.getUsers().then(function (user) {
     response.json(user);

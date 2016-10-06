@@ -7,6 +7,21 @@ router.get('/', (request, response, next) => {
   response.send("home Page")
 })
 
+router.get('/freeSlots/:serviceId', (request, response, next) => {
+  const serviceId = request.params.serviceId
+  queries.getFreeSlotsByServiceId(serviceId)
+    .then(freeSlots => {
+      response.json(freeSlots)
+    })
+})
+
+router.get('/services', (request, response, next) => {
+  queries.getAllServices()
+    .then( services => {
+      response.json(services)
+    })
+})
+
 router.get('/user', (request, response, next) => {
   queries.getUsers()
     .then(user => {

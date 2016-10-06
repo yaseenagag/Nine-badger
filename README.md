@@ -1,20 +1,20 @@
 
+
 ![Wireframe Schema SQL](Wireframe.png)
 
 
 #### HTTP API
 
-| action                             | CRUD   | verb | path                         |
-| ----------------------------       | ------ | ---- | ---------------------------- |
-| findUserByEmailOrcreateUser(userId)| create | post | /api/users/                  |
-| getUserById(userId)                | show   | get  | /api/users/:userId           |
-| updateUser(userId, attrs)          | update | post | /api/users/:userId           |
-| getAllServices()                   | Show   | get  | /api/services                |
-| setAppointment(attrs)              | create | post | /api/appointments            |
-| deleteAppointment(apptId)          | delete | post | /api/appointments            |
-| updateAppointment(apptId)          | update | post | /api/appointments            |
-| getAllAppointments(userId)         | show   | get  | /api/appointments            |
-
+| action                             | CRUD   | verb | path                 |
+| ----------------------------       | ------ | ---- | ---------------------|
+| findUserByEmailOrcreateUser(userId)| create | post | /api/users/          |
+| getUserById(userId)                | show   | get  | /api/users/:userId   |
+| updateUser(userId, attrs)          | update | post | /api/users/:userId   |
+| setAppointment(attrs)              | create | post | /api/appointments    |
+| deleteAppointment(apptId)          | delete | post | /api/appointments    |
+| updateAppointment(apptId)          | update | post | /api/appointments    |
+| getAllAppointments(userId)         | show   | get  | /api/appointments    |
+| getFreeSlotsByServiceId(serviceId) | show   | get  | /api/freeSlots/:serviceId|
 
 
 

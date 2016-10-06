@@ -126,4 +126,105 @@ describe('API', function () {
       });
     }); // dummy data users
   });
+
+  describe('/services', function () {
+
+    context('when there are services in the database', function () {
+      beforeEach(function () {
+        return Promise.all([commands.createService({
+          id: 15,
+          title: 'Android Screens',
+          logoUrl: 'https://avatars0.githubusercontent.com/u/7544733?v=3&s=466',
+          description: 'fix androids'
+        }), commands.createService({
+          id: 366,
+          title: 'Mac Screens',
+          logoUrl: 'https://avatars0.githubusercontent.com/u/7544733?v=3&s=466',
+          description: 'fix apples'
+        })]);
+      });
+
+      describe('GET /services', function () {
+        it('should render a json array of all services', function () {
+          return request('get', '/services').then(function (response) {
+            var services = response.body;
+            expect(services).to.be.an('array');
+            expect(services.length).to.eql(2);
+            services.forEach(function (service) {
+              if (service.id === 15) {
+                expect(service).to.be.a('object');
+                expect(service.id).to.eql(15);
+                expect(service.title).to.eql('Android Screens');
+                expect(service.logoUrl).to.eql('https://avatars0.githubusercontent.com/u/7544733?v=3&s=466');
+                expect(service.description).to.eql('fix androids');
+              } else if (service.id === 366) {
+                expect(service).to.be.a('object');
+                expect(service.id).to.eql(366);
+                expect(service.title).to.eql('Mac Screens');
+                expect(service.logoUrl).to.eql('https://avatars0.githubusercontent.com/u/7544733?v=3&s=466');
+                expect(service.description).to.eql('fix apples');
+              }
+            });
+          });
+        });
+      });
+
+      context('when there are agents in the database', function () {
+        beforeEach(function () {
+          return Promise.all([commands.createAgent({
+            id: 16,
+            firstName: 'Mike',
+            lastName: 'Abelson',
+            phoneNumber: '4157077256',
+            email: 'mikeadelson@yahoo.com',
+            imageUrl: 'http://vignette2.wikia.nocookie.net/spongebob/images/3/33/Patrick_Star.svg/revision/latest?cb=20100724183918',
+            password: '777'
+          }, [{
+            "day": "tuesday",
+            "hours": [{
+              "end": "11:00",
+              "start": "04:00"
+            }]
+          }, {
+            "day": "thursday",
+            "hours": [{
+              "end": "18:00",
+              "start": "06:00"
+            }]
+          }], [1, 2]), commands.createAgent({
+            id: 15,
+            firstName: 'Majid',
+            lastName: 'Rahimi',
+            phoneNumber: '4152655659',
+            email: 'majid88rahimi@gmail.com',
+            imageUrl: 'https://avatars0.githubusercontent.com/u/7544733?v=3&s=466',
+            password: '333'
+          }, [{
+            "day": "monday",
+            "hours": [{
+              "end": "17:00",
+              "start": "11:00"
+            }]
+          }, {
+            "day": "friday",
+            "hours": [{
+              "end": "20:00",
+              "start": "08:00"
+            }]
+          }], [366, 15])]);
+        });
+
+        describe('GET /freeSlots/:serviceId', function () {
+          it('should render a json array of all freeSlots', function () {
+            return request('get', '/freeSlots/366').then(function (response) {
+              var freeSlots = response.body;
+              expect(freeSlots).to.be.a('object');
+              expect(freeSlots.monday).to.be.a('array');
+              console.log("freeSlots+++++ ", freeSlots);
+            });
+          });
+        });
+      }); // dummy data agents
+    }); // dummy data services
+  });
 });
