@@ -19,6 +19,7 @@ exports.default = function (knex) {
     },
     getFreeSlotsByServiceId: function getFreeSlotsByServiceId(serviceId) {
       return Promise.all([knex.from('agents').join('agent_services', { 'agent_services.agent_id': 'agents.id' }).where('agent_services.service_id', serviceId)]).then(function (agents) {
+        console.log("agents", agents);
         return generateFreeSlots(agents);
       });
     },

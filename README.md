@@ -7,16 +7,15 @@
 
 | action                             | CRUD   | verb | path                 |
 | ----------------------------       | ------ | ---- | ---------------------|
-| findUserByEmailOrcreateUser(userId)| create | post | /api/users/          |
-| getUserById(userId)                | show   | get  | /api/users/:userId   |
-| updateUser(userId, attrs)          | update | post | /api/users/:userId   |
-| setAppointment(attrs)              | create | post | /api/appointments    |
-| deleteAppointment(apptId)          | delete | post | /api/appointments    |
-| updateAppointment(apptId)          | update | post | /api/appointments    |
-| getAllAppointments(userId)         | show   | get  | /api/appointments    |
-| getFreeSlotsByServiceId(serviceId) | show   | get  | /api/freeSlots/:serviceId|
-
-
+| findUserByEmailOrcreateUser(userId)| create | post | /users/              |
+| getUserById(userId)                | show   | get  | /users/:userId       |
+| updateUser(userId, attrs)          | update | post | /users/:userId       |
+| setAppointment(attrs)              | create | post | /appointments        |
+| deleteAppointment(apptId)          | delete | post | /appointments        |
+| updateAppointment(apptId)          | update | post | /appointments        |
+| getAllAppointments(userId)         | show   | get  | /appointments        |
+| getFreeSlotsByServiceId(serviceId) | show   | get  | /freeSlots/:serviceId|
+| services()                         | show   | get  | /services            |
 
 
 
