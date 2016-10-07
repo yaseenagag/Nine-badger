@@ -30,6 +30,7 @@ export default (knex) => ({
       .where('agent_services.service_id', serviceId)
     ])
     .then(agents => {
+      console.log("agents", agents)
       return generateFreeSlots(agents)
     })
 
