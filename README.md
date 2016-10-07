@@ -1,4 +1,8 @@
-
+## Nine-badger Team
+Majid
+Mike
+Yaseen
+Nico
 
 ![Wireframe Schema SQL](Wireframe.png)
 
